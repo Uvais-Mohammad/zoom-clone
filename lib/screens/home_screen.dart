@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:zoom_clone/resources/auth_methods.dart';
+import 'package:zoom_clone/resources/jitsi_methods.dart';
 import 'package:zoom_clone/utils/colors.dart';
 import 'package:zoom_clone/widgets/home_icon_button.dart';
 import 'package:zoom_clone/widgets/search_bar.dart';
@@ -22,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: backgroundColor,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              AuthMethod().signOut();
+            },
             icon: const Icon(Icons.chat_bubble_outline_rounded),
           ),
         ],
@@ -35,23 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
+              children:  [
                 HomeIconButton(
                   icon: Icons.video_call,
                   text: 'New Meeting',
                   backgroundColor: Colors.orange,
+                  onPressed: () {
+                    JitsiMethods().joinMeeting();
+                  },
                 ),
                 HomeIconButton(
                   icon: Icons.add_box,
-                  text: 'Join',
+                  text: 'Join',onPressed: () {},
                 ),
                 HomeIconButton(
                   icon: Icons.calendar_today_rounded,
-                  text: 'Schedule',
+                  text: 'Schedule',onPressed: () {},
                 ),
                 HomeIconButton(
                   icon: Icons.arrow_upward_rounded,
-                  text: 'Share Screen',
+                  text: 'Share Screen',onPressed: () {},
                 ),
               ],
             ),

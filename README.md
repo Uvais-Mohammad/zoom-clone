@@ -19,6 +19,7 @@ This project is a starting point for a Flutter application.
 ### Some tips i learned while building this project
 
 - Always use  ```arch -x86_64 pod install```  instead of  ```pod install```  for ios after adding any package.
+- Run ```open -a ChromiumOrCanaryPathHere --args --disable-web-security --user-data-dir"```  in terminal for disabling Cors issue that makes problem with creating firestore database.
 
 ### Some project specific tips
 

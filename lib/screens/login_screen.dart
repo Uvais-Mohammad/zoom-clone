@@ -7,7 +7,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthMethod _authMethod = AuthMethod();
+    final AuthMethod authMethod = AuthMethod();
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,8 +25,9 @@ class LoginScreen extends StatelessWidget {
           ),
           CustomButton(
               onPressed: () async {
-                bool res = await _authMethod.signInWithGoogle(context);
+                bool res = await authMethod.signInWithGoogle(context);
                 if (res) {
+                  // ignore: use_build_context_synchronously
                   Navigator.pushReplacementNamed(context, '/home');
                 }
               },

@@ -7,18 +7,20 @@ class HomeIconButton extends StatelessWidget {
     required this.icon,
     required this.text,
     this.backgroundColor = buttonColor,
+    required this.onPressed,
   }) : super(key: key);
 
   final IconData icon;
   final String text;
   final Color backgroundColor;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: onPressed,
             borderRadius: BorderRadius.circular(20),
             child: Container(
               padding: const EdgeInsets.all(12.0),

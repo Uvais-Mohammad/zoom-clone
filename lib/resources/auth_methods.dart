@@ -31,7 +31,7 @@ class AuthMethod {
 
       if (user != null) {
         if (userCredential.additionalUserInfo!.isNewUser) {
-          await firebaseFirestore.collection('user').doc(user.tenantId).set({
+          await firebaseFirestore.collection('user').doc(user.uid).set({
             'username': user.displayName,
             'uid': user.uid,
             'profilePhoto': user.photoURL,

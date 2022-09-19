@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                 bool res = await authMethod.signInWithGoogle(context);
                 if (res) {
                   // ignore: use_build_context_synchronously
-                  Navigator.pushReplacementNamed(context, '/home');
+                 await Navigator.pushReplacementNamed(context, '/home');
                 }
               },
               text: 'Sign in with Google'),

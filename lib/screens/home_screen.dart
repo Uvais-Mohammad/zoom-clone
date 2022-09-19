@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zoom_clone/resources/auth_methods.dart';
-import 'package:zoom_clone/resources/jitsi_methods.dart';
+import 'package:zoom_clone/screens/meet_and_chat_screen.dart';
 import 'package:zoom_clone/utils/colors.dart';
-import 'package:zoom_clone/widgets/home_icon_button.dart';
-import 'package:zoom_clone/widgets/search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,62 +11,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+  final List<Widget> _screens = [
+    const MeetAndChatScreen(),
+    const Center(child: Text('Meet')),
+    const Center(child: Text('Chat')),
+    const Center(child: Text('Contacts')),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meet & Chat'),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: backgroundColor,
-        actions: [
-          IconButton(
-            onPressed: () {
-              AuthMethod().signOut();
-            },
-            icon: const Icon(Icons.chat_bubble_outline_rounded),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          const SearchBar(),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:  [
-                HomeIconButton(
-                  icon: Icons.video_call,
-                  text: 'New Meeting',
-                  backgroundColor: Colors.orange,
-                  onPressed: () {
-                    JitsiMethods().joinMeeting();
-                  },
-                ),
-                HomeIconButton(
-                  icon: Icons.add_box,
-                  text: 'Join',onPressed: () {},
-                ),
-                HomeIconButton(
-                  icon: Icons.calendar_today_rounded,
-                  text: 'Schedule',onPressed: () {},
-                ),
-                HomeIconButton(
-                  icon: Icons.arrow_upward_rounded,
-                  text: 'Share Screen',onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Divider(
-            color: Colors.grey,
-            thickness: 0.4,
-          ),
-        ],
-      ),
+      body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: footerColor,
         selectedItemColor: Colors.white,

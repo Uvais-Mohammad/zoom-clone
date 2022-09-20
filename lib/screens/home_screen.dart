@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zoom_clone/screens/contact_screen.dart';
 import 'package:zoom_clone/screens/meet_and_chat_screen.dart';
 import 'package:zoom_clone/screens/meetings_screen.dart';
 import 'package:zoom_clone/utils/colors.dart';
@@ -11,11 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 1;
+  int _currentIndex = 2;
   final List<Widget> _screens = [
     const MeetAndChatScreen(),
     const MeetingsScreen(),
-    const Center(child: Text('Chat')),
+    const ContactScreen(),
     const Center(child: Text('Contacts')),
   ];
   @override

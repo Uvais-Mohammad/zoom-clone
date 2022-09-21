@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:zoom_clone/resources/auth_methods.dart';
 import 'package:zoom_clone/resources/jitsi_methods.dart';
+import 'package:zoom_clone/screens/join_screen.dart';
 import 'package:zoom_clone/utils/colors.dart';
+import 'package:zoom_clone/widgets/custome_page_route.dart';
 import 'package:zoom_clone/widgets/home_icon_button.dart';
 import 'package:zoom_clone/widgets/search_bar.dart';
 
@@ -57,7 +59,14 @@ class MeetAndChatScreen extends StatelessWidget {
                 HomeIconButton(
                   icon: Icons.add_box,
                   text: 'Join',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      CustomPageRoute(
+                          child: const JoinScreen(),
+                          direction: AxisDirection.up),
+                    );
+                  },
                 ),
                 HomeIconButton(
                   icon: Icons.calendar_today_rounded,

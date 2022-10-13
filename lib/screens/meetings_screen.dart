@@ -94,15 +94,17 @@ class MeetingsScreen extends StatelessWidget {
                   child: CircularProgressIndicator.adaptive(),
                 );
               }
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: (snapshot.data! as dynamic).docs.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(
-                    'Room Id: ${(snapshot.data! as dynamic).docs[index]['meetingId']}',
-                  ),
-                  subtitle: Text(
-                    'Joined on ${DateFormat.yMMMd().format((snapshot.data! as dynamic).docs[index]['timestamp'].toDate())} at ${DateFormat.jm().format((snapshot.data! as dynamic).docs[index]['timestamp'].toDate())}',
+              return Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: (snapshot.data! as dynamic).docs.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(
+                      'Room Id: ${(snapshot.data! as dynamic).docs[index]['meetingId']}',
+                    ),
+                    subtitle: Text(
+                      'Joined on ${DateFormat.yMMMd().format((snapshot.data! as dynamic).docs[index]['timestamp'].toDate())} at ${DateFormat.jm().format((snapshot.data! as dynamic).docs[index]['timestamp'].toDate())}',
+                    ),
                   ),
                 ),
               );

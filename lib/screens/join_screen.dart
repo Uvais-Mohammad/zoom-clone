@@ -1,16 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zoom_clone/resources/auth_methods.dart';
+import 'package:zoom_clone/resources/jitsi_methods.dart';
 import 'package:zoom_clone/utils/colors.dart';
 
-class JoinScreen extends StatelessWidget {
+class JoinScreen extends StatefulWidget {
   const JoinScreen({super.key});
 
   @override
+  State<JoinScreen> createState() => _JoinScreenState();
+}
+
+class _JoinScreenState extends State<JoinScreen> {
+  final TextEditingController nameController = TextEditingController(
+      text: AuthMethod().firebaseAuth.currentUser!.displayName);
+  final TextEditingController roomController = TextEditingController();
+  bool isAudioMuted = false;
+  bool isVideoMuted = true;
+  @override
   Widget build(BuildContext context) {
-    final AuthMethod authMethods = AuthMethod();
-    final TextEditingController nameController = TextEditingController(
-        text: authMethods.firebaseAuth.currentUser!.displayName);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Join Meeting'),
@@ -43,6 +51,7 @@ class JoinScreen extends StatelessWidget {
               ),
               child: TextField(
                 textAlign: TextAlign.center,
+                controller: roomController,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Meeting ID',
@@ -91,7 +100,12 @@ class JoinScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  JitsiMethods().joinMeeting(
+                      roomName: roomController.text,
+                      isAudioMuted: isAudioMuted,
+                      isVideoMuted: isVideoMuted);
+                },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
                   shape: RoundedRectangleBorder(
@@ -116,12 +130,24 @@ class JoinScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ListTile(
               title: const Text('Join with Computer Audio'),
-              trailing: CupertinoSwitch(onChanged: (value) {}, value: true),
+              trailing: CupertinoSwitch(
+                  onChanged: (value) {
+                    setState(() {
+                      isAudioMuted = !value;
+                    });
+                  },
+                  value: !isAudioMuted),
               tileColor: secondaryBackgroundColor,
             ),
             ListTile(
               title: const Text('Join with Video'),
-              trailing: CupertinoSwitch(onChanged: (value) {}, value: false),
+              trailing: CupertinoSwitch(
+                  onChanged: (value) {
+                    setState(() {
+                      isVideoMuted = !value;
+                    });
+                  },
+                  value: !isVideoMuted),
               tileColor: secondaryBackgroundColor,
             ),
           ],
